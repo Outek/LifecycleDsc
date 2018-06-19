@@ -11,4 +11,4 @@ Configuration Example
     
 Example
 
-Start-DscConfiguration -Wait -Force Test
+Start-DscConfiguration  -Wait -Force -Verbose Example
