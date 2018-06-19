@@ -29,10 +29,12 @@ class LifecycleDsc
  
         if ($Item -eq $True)
         {
+            Write-Verbose "Returning True, Path $($This.LifecyclePath) is present"
             $This.Ensure = [Ensure]::Present
         }
         else
         {
+            Write-Verbose "Returning False, Path $($This.LifecyclePath) is not present"
             $This.Ensure = [Ensure]::Absent
         }
  
@@ -50,7 +52,7 @@ class LifecycleDsc
         {
             if (-not $Item)
             {
-                Write-Verbose -Message "Folder not found, creating Folder"
+                Write-Verbose "Folder not found, creating Folder"
                 New-Item -ItemType Directory -Path $This.Path
             }
         }
@@ -58,7 +60,7 @@ class LifecycleDsc
         {
             if ($Item)
             {
-                Write-Verbose -Message "File exists and should be absent.  Deleting file"
+                Write-Verbose "File exists and should be absent.  Deleting file"
                 Remove-Item -Path $This.Path
             }
         }
@@ -75,10 +77,12 @@ class LifecycleDsc
  
         if ($This.Ensure -eq [Ensure]::Present)
         {
+            Write-Verbose "Returning Test-Path True, Path $($This.LifecyclePath) is present"
             Return $Item
         }
         else
         {
+            Write-Verbose "Returning Test-Path False, Path $($This.LifecyclePath) is not present"
             Return -not $Item
         }
     }
